@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  classifier-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=5000
+      - DEBUG=false
+    volumes:
+      - ../.env:/app/.env
+      - ../documents:/app/documents
+      - ../output:/app/output
+    restart: unless-stopped
+
+  classifier-cli:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    environment:
+      DEBUG: "false"
+    volumes:
+      - ../.env:/app/.env
+      - ../documents:/app/documents
+      - ../output:/app/output
+    entrypoint: ["python", "main.py"]

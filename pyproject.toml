@@ -1,0 +1,36 @@
+[project]
+name = "legal-clause-classifier"
+version = "0.2.0"
+description = "A tool for classifying legal clauses in contracts with confidence scoring"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai==1.98.0",
+    "flask==3.1.1",
+    "requests==2.32.4",
+    "nltk==3.9.1",
+    "pydantic==2.11.7",
+    "pydantic-settings==2.10.1",
+    "python-dotenv==1.1.1",
+    "unstructured==0.18.11",
+    "unstructured[pdf]==0.18.11",
+    "loguru==0.7.3"
+]
+
+[project.scripts]
+classify = "main:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "isort"
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
